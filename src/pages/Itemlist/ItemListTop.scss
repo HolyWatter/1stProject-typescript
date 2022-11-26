@@ -1,0 +1,72 @@
+@import '../../styles/variable';
+
+.itemListTop {
+  width: 1200px;
+  height: 120px;
+  margin: 0 auto;
+  padding-right: 10px;
+  padding-left: 10px;
+
+  .itemListTopToolBox {
+    .underLine {
+      text-decoration: underline;
+    }
+
+    .itemListTopBack {
+      margin-left: 5px;
+      font-size: 14px;
+      font-weight: 700;
+
+      svg {
+        margin-right: 5px;
+      }
+    }
+
+    .itemListTopBack:hover {
+      background-color: #000;
+      color: #fff;
+    }
+
+    .itemListTopText {
+      margin-left: 10px;
+      font-size: 16px;
+      font-weight: 400;
+    }
+
+    .itemListTopText:hover {
+      background-color: #000;
+      color: #fff;
+    }
+  }
+
+  .itemListTopBack {
+    font-size: 14px;
+  }
+
+  .itemListTopFlex {
+    @include flex(space-between, center, null);
+    height: 65px;
+
+    .itemListTopCategoryAndItemNum {
+      @include flex(null, end, null);
+
+      .itemListTopCategory {
+        font-size: 30px;
+      }
+
+      .itemListTopItemNum {
+        margin-left: 5px;
+        color: #767677;
+        font-size: 12px;
+      }
+    }
+
+    .filterAndSortBtn {
+      width: 145px;
+      height: 40px;
+      background-color: #fff;
+      font-size: 14px;
+      font-weight: 900;
+    }
+  }
+}

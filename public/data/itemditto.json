@@ -1,0 +1,33 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "가젤",
+      "price": "95000.00",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1491553895911-0055eca6402d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1160&q=80",
+      "gender": "men",
+      "category": "originals",
+      "images": [
+        "https://cdn.pixabay.com/photo/2015/06/25/17/28/sea-821582_960_720.jpg",
+        "https://cdn.pixabay.com/photo/2010/12/22/10/23/slippers-3886__340.jpg"
+      ],
+      "stocksize": [
+        {
+          "id": 1,
+          "stock": 5,
+          "footSize": 230
+        },
+        {
+          "id": 2,
+          "stock": 10,
+          "footSize": 250
+        },
+        {
+          "id": 3,
+          "stock": 10,
+          "footSize": 270
+        }
+      ]
+    }
+  ]
+}

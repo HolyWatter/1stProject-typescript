@@ -1,0 +1,23 @@
+.itemList {
+  padding: 40px 10px 10px 10px;
+
+  .itemListProducts {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: 1200px;
+    margin: 0 auto;
+    padding: 10px;
+  }
+  .pagination {
+    display: flex;
+    justify-content: center;
+
+    .pagingBtn {
+      width: 25px;
+      height: 25px;
+      margin-left: 5px;
+      border: 0.3px solid #ebeff1;
+      background-color: #fff;
+    }
+  }
+}

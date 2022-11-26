@@ -1,0 +1,59 @@
+.main {
+  overflow: hidden;
+
+  .mainBanner {
+    position: relative;
+    width: 100vw;
+    height: 90vh;
+    margin-bottom: 80px;
+
+    .imgBox {
+      position: relative;
+
+      img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 90vh;
+        object-fit: cover;
+      }
+
+      .show {
+        z-index: 1;
+      }
+    }
+
+    .titleBox {
+      position: absolute;
+      z-index: 1;
+      top: 50%;
+      left: 150px;
+      transform: translateY(-50%);
+      color: #fff;
+
+      h2 {
+        margin-bottom: 15px;
+        font-size: 45px;
+      }
+      p {
+        margin-bottom: 20px;
+      }
+    }
+  }
+
+  .mainSlide {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    .title {
+      margin-bottom: 20px;
+      font-size: 40px;
+    }
+
+    .slideContainer {
+      overflow: hidden;
+    }
+  }
+}

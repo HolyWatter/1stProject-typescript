@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
+* {
+  box-sizing: border-box;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.inputBox {
+  width: 100%;
+
+  .input {
+    padding: 16px 14px;
+    margin-bottom: 5px;
+    width: 100%;
+    font-size: 16px;
+    border: 1px solid black;
+    border-bottom: 2px solid red;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .alert {
+    font-size: 14px;
+    color: red;
+  }
+}

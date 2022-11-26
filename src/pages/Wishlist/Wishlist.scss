@@ -1,0 +1,45 @@
+.wishList {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding-top: 40px;
+
+  .title {
+    margin-bottom: 20px;
+    font-size: 32px;
+    font-weight: 700;
+  }
+
+  .productCount {
+    margin-bottom: 10px;
+  }
+
+  .signupBanner {
+    width: 100%;
+    padding: 30px 50px;
+    background-color: #6d8094;
+    color: #fff;
+
+    .signupTitle {
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .description {
+      margin-bottom: 20px;
+    }
+
+    .signin {
+      margin: 20px 0 5px;
+    }
+  }
+
+  .wishListItem {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+
+    .wishProduct {
+      width: 180px;
+      margin-bottom: 10px;
+    }
+  }
+}

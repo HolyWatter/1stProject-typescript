@@ -1,0 +1,255 @@
+[
+  {
+    "id": 1,
+    "gender": "남성",
+    "shoes": {
+      "name": "신발",
+      "url": "/itemlist/men?category=all&sort=&offset=0&limit=8"
+    },
+    "shoesCategory": [
+      {
+        "name": "오리지널스",
+        "url": "/itemlist/men?category=originals&sort=&offset=0&limit=8"
+      },
+      {
+        "name": "슬리퍼",
+        "url": "/itemlist/men?category=slipper&sort=&offset=0&limit=8"
+      },
+      {
+        "name": "사커",
+        "url": "/itemlist/men?category=soccer&sort=&offset=0&limit=8"
+      }
+    ],
+    "classname": "mshoes"
+  },
+  {
+    "id": 2,
+    "gender": "남성",
+    "shoes": {
+      "name": "의류",
+      "url": "/cloths"
+    },
+    "shoesCategory": [
+      {
+        "name": "자켓",
+        "url": "/jacket"
+      },
+      {
+        "name": "축구 저지",
+        "url": "/uniform"
+      },
+      {
+        "name": "후디/스웨트셔츠",
+        "url": "/shirts"
+      }
+    ],
+    "classname": "mattires"
+  },
+  {
+    "id": 3,
+    "gender": "남성",
+    "shoes": {
+      "name": "용품",
+      "url": "/accessories"
+    },
+    "shoesCategory": [
+      {
+        "name": "양말",
+        "url": "/shocks"
+      },
+      {
+        "name": "모자",
+        "url": "/cap"
+      },
+      {
+        "name": "가방",
+        "url": "/bag"
+      }
+    ],
+    "classname": "maccessories"
+  },
+  {
+    "id": 4,
+    "gender": "남성",
+    "shoes": {
+      "name": "스포츠",
+      "url": "/sports"
+    },
+    "shoesCategory": [
+      {
+        "name": "러닝",
+        "url": "/running"
+      },
+      {
+        "name": "아웃도어",
+        "url": "/outdoor"
+      },
+      {
+        "name": "트레이닝",
+        "url": "/training"
+      }
+    ],
+    "classname": "msports"
+  },
+
+  {
+    "id": 5,
+    "gender": "여성",
+    "shoes": {
+      "name": "신발",
+      "url": "/itemlist/women?category=all&sort=&offset=0&limit=8"
+    },
+    "shoesCategory": [
+      {
+        "name": "오리지널스",
+        "url": "/itemlist/women?category=originals&sort=&offset=0&limit=8"
+      },
+      {
+        "name": "슬리퍼",
+        "url": "/itemlist/women?category=slipper&sort=&offset=0&limit=8"
+      },
+      {
+        "name": "사커",
+        "url": "/itemlist/women?category=soccer&sort=&offset=0&limit=8"
+      }
+    ],
+    "classname": "mshoes"
+  },
+  {
+    "id": 6,
+    "gender": "여성",
+    "shoes": {
+      "name": "의류",
+      "url": "/cloths"
+    },
+    "shoesCategory": [
+      {
+        "name": "자켓",
+        "url": "/jacket"
+      },
+      {
+        "name": "축구 저지",
+        "url": "/uniform"
+      },
+      {
+        "name": "후디/스웨트셔츠",
+        "url": "/shirts"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "gender": "여성",
+    "shoes": {
+      "name": "용품",
+      "url": "/accessories"
+    },
+    "shoesCategory": [
+      {
+        "name": "양말",
+        "url": "/shocks"
+      },
+      {
+        "name": "모자",
+        "url": "/cap"
+      },
+      {
+        "name": "가방",
+        "url": "/bag"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "gender": "여성",
+    "shoes": {
+      "name": "스포츠",
+      "url": "/sports"
+    },
+    "shoesCategory": [
+      {
+        "name": "러닝",
+        "url": "/running"
+      },
+      {
+        "name": "아웃도어",
+        "url": "/outdoor"
+      },
+      {
+        "name": "트레이닝",
+        "url": "/training"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "shoes": {
+      "name": "남성 전체보기",
+      "url": "/itemlist/men?category=all&sort=&offset=0&limit=8"
+    }
+  },
+  {
+    "id": 10,
+    "shoes": {
+      "name": "남성신발 전체보기",
+      "url": "/itemlist/men?category=all&sort=&offset=0&limit=8"
+    }
+  },
+  {
+    "id": 11,
+    "shoes": {
+      "name": "남성의류 전체보기",
+      "url": "/allMensAttires"
+    }
+  },
+  {
+    "id": 12,
+    "shoes": {
+      "name": "남성용품 전체보기",
+      "url": "/allMensProps"
+    }
+  },
+  {
+    "id": 13,
+    "shoes": {
+      "name": "스포츠 전체보기",
+      "url": "/allSports"
+    }
+  },
+
+  {
+    "id": 14,
+    "shoes": {
+      "name": "여성 전체보기",
+      "url": "/itemlist/women?category=all&sort=&offset=0&limit=8"
+    }
+  },
+  {
+    "id": 15,
+    "shoes": {
+      "name": "여성신발 전체보기",
+      "url": "/itemlist/women?category=all&sort=&offset=0&limit=8"
+    }
+  },
+  {
+    "id": 16,
+    "shoes": {
+      "name": "여성의류 전체보기",
+      "url": "/allWMensAttires"
+    }
+  },
+  {
+    "id": 17,
+    "shoes": {
+      "name": "여성용품 전체보기",
+      "url": "/allWMensProps"
+    }
+  },
+  {
+    "id": 18,
+    "shoes": {
+      "name": "스포츠 전체보기",
+      "url": "/WallSports"
+    }
+  }
+]

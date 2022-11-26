@@ -1,0 +1,53 @@
+.itemProduct {
+  position: relative;
+  width: 250px;
+
+  .heartIcon {
+    display: block;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background-size: cover;
+  }
+
+  .itemProductImgBox {
+    position: relative;
+    width: 100%;
+
+    .itemProductImg {
+      width: 100%;
+    }
+
+    .itemPrice {
+      position: absolute;
+      bottom: 0px;
+      left: 10px;
+      padding: 5px;
+      transition: all 0.3s ease-in-out;
+      background-color: #fff;
+    }
+  }
+
+  .itemTextBox {
+    height: 90px;
+    padding: 10px;
+
+    .itemName {
+      margin-bottom: 5px;
+      font-size: 14px;
+    }
+
+    .itemCategory {
+      color: #767677;
+      font-size: 14px;
+    }
+  }
+
+  &:hover {
+    border: 1px black solid;
+
+    .itemPrice {
+      bottom: 10px;
+    }
+  }
+}

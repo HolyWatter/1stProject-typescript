@@ -1,0 +1,74 @@
+@import '../../styles/variable';
+
+.cartAside {
+  @include flex(space-between, null, column);
+  width: 430px;
+  height: 380px;
+  margin: 60px 50px 0 45px;
+
+  .purchaseBtn {
+    width: 430px;
+    height: 50px;
+  }
+
+  .purchaseBox {
+    width: 430px;
+    padding: 24px 15px;
+    border: 1px solid #eceff1;
+
+    .orderSummary {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .boxText {
+      font-size: 14px;
+    }
+  }
+
+  .purchaseBoxFlex {
+    @include flex(space-between, null, null);
+    margin-top: 14px;
+
+    .purchaseTotalText {
+      font-size: 16px;
+      font-weight: 600;
+    }
+  }
+
+  .promotion {
+    width: 430px;
+    height: 53px;
+    border: 1px solid #767677;
+  }
+
+  .promotion:focus {
+    outline: none;
+  }
+
+  .methodFlex {
+    @include flex(null, center, null);
+
+    .paykoIcon {
+      width: 35px;
+      height: 30px;
+    }
+
+    .paykoText {
+      color: #fa2828;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .naverIcon {
+      width: 25px;
+      height: 25px;
+      margin: 7px;
+    }
+
+    .naverText {
+      color: #767677;
+      font-size: 20px;
+    }
+  }
+}

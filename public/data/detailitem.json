@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "가젤",
+    "description": "변함없는 디자인으로 돌아온 1991 가젤\n30년이 넘는 시간 동안 사랑받아 온 심플함의 아이콘. 이번 버전의 가젤은 큰 인기를 얻었던 1991 가젤의 클래식한 소재, 칼라, 텍스쳐, 구조를 그대로 이어갑니다. 가죽 갑피에 대비색상 3-스트라이프와 힐 탭을 더해 90년대 초반의 오리지널 스타일을 선보입니다.",
+    "thumbnail": "https://images.unsplash.com/photo-1491553895911-0055eca6402d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1160&q=80",
+    "stocksize": [
+      { "size": 230, "stock": 5 },
+      { "size": 240, "stock": 0 },
+      { "size": 250, "stock": 10 },
+      { "size": 260, "stock": 7 }
+    ],
+    "category": "originals",
+    "gender": "men",
+    "imageUrl": [
+      "https://cdn.pixabay.com/photo/2015/06/25/17/28/sea-821582_960_720.jpg",
+      "https://cdn.pixabay.com/photo/2010/12/22/10/23/slippers-3886__340.jpg"
+    ]
+  }
+]
