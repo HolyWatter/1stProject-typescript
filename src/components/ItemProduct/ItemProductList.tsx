@@ -1,23 +1,39 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { HiOutlineHeart, HiHeart } from 'react-icons/hi';
-import './ItemProduct.scss';
+import React, { FC, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { HiOutlineHeart, HiHeart } from "react-icons/hi";
+import "./ItemProduct.scss";
 
-const ItemProduct = ({ data }) => {
-  const [isWish, setIsWish] = useState(false);
+interface Data {
+  thumbnailUrl: string;
+  price: string;
+  name: string;
+  category: number;
+  productId: number;
+  id: number;
+}
+
+interface Props {
+  data: Data;
+}
+
+const ItemProduct: FC<Props> = ({ data }) => {
+  const [isWish, setIsWish] = useState<boolean>(false);
   const handleWishClick = () => {
     setIsWish(!isWish);
   };
-  const priceToString = price => {
-    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  const headers: HeadersInit = new Headers();
+  const priceToString = (price: number) => {
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
+  useEffect(() => {
+    headers.set("content-type", "application/json");
+    headers.set("autorization", localStorage.getItem("token") || "");
+  }, []);
+
   const clickHeart = () => {
-    fetch('http://10.58.52.114:3000/wishlists', {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-        authorization: localStorage.getItem('token'),
-      },
+    fetch("http://10.58.52.114:3000/wishlists", {
+      method: "POST",
+      headers,
       body: JSON.stringify({
         productId: data.productId,
       }),

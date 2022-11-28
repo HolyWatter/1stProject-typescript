@@ -4,9 +4,9 @@ import { GiSpeakerOff, GiSpeaker } from 'react-icons/gi';
 import './MainBanner.scss';
 
 const MainBanner = () => {
-  const [isPlayToggle, setIsPlayToggle] = useState(true);
-  const [isSoundToggle, setIsSoundToggle] = useState(true);
-  const [currentImage, setCurrentImage] = useState('');
+  const [isPlayToggle, setIsPlayToggle] = useState<boolean>(true);
+  const [isSoundToggle, setIsSoundToggle] = useState<boolean>(true);
+  const [currentImage, setCurrentImage] = useState<string>('');
 
   useEffect(() => {
     if (isPlayToggle === true) {

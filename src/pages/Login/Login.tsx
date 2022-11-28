@@ -1,51 +1,54 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { BsCheck2, BsArrowRight } from 'react-icons/bs';
-import Button from '../../components/Button/Button';
-import './Login.scss';
-import { api } from '../../config';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { BsCheck2, BsArrowRight } from "react-icons/bs";
+import Button from "../../components/Button/Button";
+import "./Login.scss";
+import { api } from "../../config";
 
 const Login = () => {
-  const [userInfoValue, setUserInfoValue] = useState({ email: '', pw: '' });
+  const [userInfoValue, setUserInfoValue] = useState({ email: "", pw: "" });
   const navigate = useNavigate();
 
   const emailRegex =
     /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
 
-  const onChangeUserInfoValue = event => {
+  const onChangeUserInfoValue = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setUserInfoValue({
       ...userInfoValue,
       [event.target.name]: event.target.value,
     });
   };
-  const handleOnsubmit = e => {
+
+  const handleOnsubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (emailRegex.test(userInfoValue.email)) {
       fetch(`${api.signin}`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json;charset=utf-8',
+          "Content-Type": "application/json;charset=utf-8",
         },
         body: JSON.stringify({
           email: userInfoValue.email,
           password: userInfoValue.pw,
         }),
       })
-        .then(response => {
+        .then((response) => {
           if (response.ok === true) {
             return response.json();
           }
-          throw new Error('통신실패');
+          throw new Error("통신실패");
         })
-        .then(data => {
+        .then((data) => {
           if (
-            data.message === 'INVALID_PASSWORD' ||
-            data.message === 'INVALID_EMAIL'
+            data.message === "INVALID_PASSWORD" ||
+            data.message === "INVALID_EMAIL"
           ) {
-            alert('이메일과 비밀번호를 다시 확인해 주세요.');
+            alert("이메일과 비밀번호를 다시 확인해 주세요.");
           } else {
-            localStorage.setItem('token', data.accessToken);
-            navigate('/');
+            localStorage.setItem("token", data.accessToken);
+            navigate("/");
           }
         });
     }
@@ -61,7 +64,7 @@ const Login = () => {
         <form className="loginBox" onSubmit={handleOnsubmit}>
           <div
             className={`inputBox ${
-              emailRegex.test(userInfoValue.email) ? 'validationInputBox' : ''
+              emailRegex.test(userInfoValue.email) ? "validationInputBox" : ""
             }`}
           >
             <input
@@ -75,13 +78,13 @@ const Login = () => {
             />
             <span className="alert">
               {emailRegex.test(userInfoValue.email)
-                ? ''
-                : '이메일 주소가 유효하지 않습니다'}
+                ? ""
+                : "이메일 주소가 유효하지 않습니다"}
             </span>
           </div>
           <div
             className={`inputBox ${
-              userInfoValue.pw ? 'validationInputBox' : ''
+              userInfoValue.pw ? "validationInputBox" : ""
             }`}
           >
             <input
@@ -94,13 +97,11 @@ const Login = () => {
               required
             />
             <span className="alert">
-              {userInfoValue.pw ? '' : '패스워드를 입력하세요'}
+              {userInfoValue.pw ? "" : "패스워드를 입력하세요"}
             </span>
           </div>
-
-          <Button>
-            로그인 <BsArrowRight className="arrow" />
-          </Button>
+          <Button>로그인</Button>
+          <BsArrowRight className="arrow" />
         </form>
       </div>
       <div className="signUpBox">
@@ -129,9 +130,8 @@ const Login = () => {
           <br />
           아디다스의 베스트 제품을 지금 만나보세요.
         </p>
-        <Button>
-          가입하기 <BsArrowRight className="arrow" />
-        </Button>
+        <Button>가입하기</Button>
+        <BsArrowRight className="arrow" />
       </div>
     </div>
   );

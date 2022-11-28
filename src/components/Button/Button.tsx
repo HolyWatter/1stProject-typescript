@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { FC } from 'react';
 import './Button.scss';
 
-const Button = ({ children, onClick }) => {
+interface Props {
+  children : string,
+}
+
+const Button:FC<Props> = ({ children }) => {
   return (
-    <button className="btn" onClick={onClick}>
+    <button className="btn">
       {children}
     </button>
   );

@@ -1,18 +1,26 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { api } from '../../config';
-import './SignUpForm.scss';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { api } from "../../config";
+import "./SignUpForm.scss";
+
+interface UserInfo {
+  email: string;
+  password: string;
+  name: string;
+  birthday: string;
+  phone_number: string;
+}
 
 const SignUpForm = () => {
   const navigate = useNavigate();
-  const [userInfo, setUsernfo] = useState({
-    email: '',
-    password: '',
-    name: '',
-    birthday: '',
-    phone_number: '',
+  const [userInfo, setUserInfo] = useState<UserInfo>({
+    email: "",
+    password: "",
+    name: "",
+    birthday: "",
+    phone_number: "",
   });
-  const handleInput = event => {
+  const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setUserInfo({
       ...userInfo,
@@ -24,15 +32,15 @@ const SignUpForm = () => {
   const passwordRegex =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
 
-  const signUp = event => {
+  const signUp = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (
       emailRegex.test(userInfo.email) &&
       passwordRegex.test(userInfo.password)
     ) {
       fetch(`${api.signup}`, {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
+        method: "POST",
+        headers: { "content-type": "application/json" },
         body: JSON.stringify({
           email: userInfo.email,
           password: userInfo.password,
@@ -42,17 +50,17 @@ const SignUpForm = () => {
           point: 300000,
         }),
       })
-        .then(res => res.json())
-        .then(data => {
-          if (data.message == 'FAILED') {
-            alert('이미 가입한 메일입니다.');
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.message === "FAILED") {
+            alert("이미 가입한 메일입니다.");
           } else {
-            alert('회원가입이 완료되었습니다.');
-            navigate('/login');
+            alert("회원가입이 완료되었습니다.");
+            navigate("/login");
           }
         });
     } else {
-      alert('양식을 다시 확인해 주세요');
+      alert("양식을 다시 확인해 주세요");
     }
   };
 
@@ -61,7 +69,7 @@ const SignUpForm = () => {
       <div className="inputBox emailInputBox">
         <p className="signUpText">회원가입</p>
         <input
-          className={userInfo.name === '' ? 'input' : 'green'}
+          className={userInfo.name === "" ? "input" : "green"}
           placeholder="이름을 입력하세요"
           type="text"
           onChange={handleInput}
@@ -69,7 +77,7 @@ const SignUpForm = () => {
           required
         />
         <input
-          className={emailRegex.test(userInfo.email) ? 'green' : 'input'}
+          className={emailRegex.test(userInfo.email) ? "green" : "input"}
           placeholder="이메일을 입력하세요"
           type="email"
           onChange={handleInput}
@@ -77,7 +85,7 @@ const SignUpForm = () => {
           required
         />
         <input
-          className={passwordRegex.test(userInfo.password) ? 'green' : 'input'}
+          className={passwordRegex.test(userInfo.password) ? "green" : "input"}
           placeholder="패스워드를 입력하세요(대문자, 특수문자포함 8자이상)"
           type="password"
           onChange={handleInput}
@@ -85,7 +93,7 @@ const SignUpForm = () => {
           required
         />
         <input
-          className={userInfo.phone_number === '' ? 'input' : 'green'}
+          className={userInfo.phone_number === "" ? "input" : "green"}
           placeholder="전화번호를 입력하세요 예시)010-1234-5678"
           type="pattern"
           pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
@@ -94,7 +102,7 @@ const SignUpForm = () => {
           required
         />
         <input
-          className={userInfo.birthday === '' ? 'input' : 'green'}
+          className={userInfo.birthday === "" ? "input" : "green"}
           placeholder="생년월일을 입력하세요 예)20001231"
           type="tel"
           onChange={handleInput}

@@ -1,9 +1,13 @@
-import React from 'react';
-import { AiOutlineCreditCard } from 'react-icons/ai';
-import { SiNaver } from 'react-icons/si';
-import './CartAside.scss';
+import React, { FC } from "react";
+import { AiOutlineCreditCard } from "react-icons/ai";
+import { SiNaver } from "react-icons/si";
+import "./CartAside.scss";
 
-const CartAside = ({ sumTotalPrice }) => {
+interface Props {
+  sumTotalPrice: string;
+}
+
+const CartAside: FC<Props> = ({ sumTotalPrice }) => {
   return (
     <div className="cartAside">
       <button className="btn purchaseBtn">구매</button>

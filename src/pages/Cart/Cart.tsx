@@ -1,26 +1,39 @@
-import React, { useState, useEffect } from 'react';
-import CartHeader from './CartHeader';
-import CartItem from './CartItem';
-import CartAside from './CartAside';
-import { api } from '../../config';
-import './Cart.scss';
+import React, { useState, useEffect } from "react";
+import CartHeader from "./CartHeader";
+import CartItem from "./CartItem";
+import CartAside from "./CartAside";
+import { api } from "../../config";
+import "./Cart.scss";
+
+interface DataCartItem {
+  quantity: string;
+  footSize: number;
+  name: string;
+  cartId: number;
+  thumbnailUrl: string;
+  productOptionId: number;
+  productId: number;
+  price: string;
+  stock: number;
+}
 
 const Cart = () => {
-  const [cartItem, setCartItem] = useState([]);
-  const priceToString = price => {
-    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  const [cartItem, setCartItem] = useState<DataCartItem[]>([]);
+  const priceToString = (price: number) => {
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
 
+  const headers: HeadersInit = new Headers();
+
   useEffect(() => {
+    headers.set("Content-Type", "application/json");
+    headers.set("authorization", localStorage.getItem("token") || "");
     fetch(`${api.carts}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-        authorization: localStorage.getItem('token'),
-      },
+      method: "GET",
+      headers,
     })
-      .then(res => res.json())
-      .then(res => setCartItem(res.selectCart));
+      .then((res) => res.json())
+      .then((res) => setCartItem(res.selectCart));
   }, []);
 
   let initialPrice = 0;
@@ -31,8 +44,8 @@ const Cart = () => {
     initialPrice
   );
 
-  const deleteCartItem = id => {
-    setCartItem(cartItem.filter(item => item.productOptionId !== id));
+  const deleteCartItem = (id: number) => {
+    setCartItem(cartItem.filter((item) => item.productOptionId !== id));
   };
 
   return (
@@ -42,9 +55,9 @@ const Cart = () => {
           length={cartItem.length}
           sumTotalPrice={priceToString(sumTotalPrice)}
         />
-        {cartItem.map(data => (
+        {cartItem.map((data) => (
           <CartItem
-            key={data.id}
+            key={data.productId}
             data={data}
             priceToString={priceToString}
             deleteCartItem={deleteCartItem}

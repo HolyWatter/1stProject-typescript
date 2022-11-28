@@ -1,38 +1,60 @@
-import React, { useState } from 'react';
-import { AiOutlineClose } from 'react-icons/ai';
-import { CiHeart } from 'react-icons/ci';
-import { SlArrowDown } from 'react-icons/sl';
-import { api } from '../../config';
-import './CartItem.scss';
+import React, { FC, useEffect, useState } from "react";
+import { AiOutlineClose } from "react-icons/ai";
+import { CiHeart } from "react-icons/ci";
+import { SlArrowDown } from "react-icons/sl";
+import { api } from "../../config";
+import "./CartItem.scss";
 
-const CartItem = ({ data, priceToString, deleteCartItem }) => {
+interface Data {
+  quantity: string;
+  footSize: number;
+  name: string;
+  cartId: number;
+  thumbnailUrl: string;
+  productOptionId: number;
+  productId: number;
+  price: string;
+  stock: number;
+}
+
+interface Props {
+  data: Data;
+  priceToString: (price: number) => string;
+  deleteCartItem: (id: number) => void;
+}
+
+const CartItem: FC<Props> = ({ data, priceToString, deleteCartItem }) => {
   const [isSelect, setIsSelect] = useState(false);
   const [numberOfShoe, setNumberOfShoe] = useState(data.quantity);
 
-  const numberOfShoeClick = e => {
-    const count = e.target.value;
-    setNumberOfShoe(e.target.value);
+  const numberOfShoeClick = (e: React.MouseEvent<HTMLElement>) => {
+    const count = (e.target as HTMLInputElement).value;
+    setNumberOfShoe((e.target as HTMLInputElement).value);
     setIsSelect(false);
-    changeStock(count);
+    changeStock(parseInt(count));
   };
 
   const clickSelectBtn = () => {
-    setIsSelect(prev => !prev);
+    setIsSelect((prev) => !prev);
   };
 
-  const clickOutside = e => {
-    if (e.target.className !== '.selectList' && isSelect) {
+  const clickOutside = (e: React.MouseEvent<HTMLElement>) => {
+    if ((e.target as HTMLElement).className !== ".selectList" && isSelect) {
       setIsSelect(false);
     }
   };
 
+  const headers: HeadersInit = new Headers();
+
+  useEffect(() => {
+    headers.set("content-type", "application/json");
+    headers.set("authorization", localStorage.getItem("token") || "");
+  });
+
   const clickHeart = () => {
     fetch(`${api.wishlists}`, {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-        authorization: localStorage.getItem('token'),
-      },
+      method: "POST",
+      headers,
       body: JSON.stringify({
         productId: data.productId,
       }),
@@ -41,11 +63,8 @@ const CartItem = ({ data, priceToString, deleteCartItem }) => {
 
   const clickDelete = () => {
     fetch(`${api.carts}?cartId=${data.cartId}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-        authorization: localStorage.getItem('token'),
-      },
+      method: "DELETE",
+      headers,
     });
   };
 
@@ -54,21 +73,18 @@ const CartItem = ({ data, priceToString, deleteCartItem }) => {
     clickDelete();
   };
 
-  const changeStock = count => {
+  const changeStock = (count: number) => {
     fetch(
       `${api.carts}?cartId=${data.cartId}&quantity=${count}&stock=${data.stock}`,
       {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json;charset=utf-8',
-          authorization: localStorage.getItem('token'),
-        },
+        method: "PATCH",
+        headers,
       }
     )
-      .then(res => res.json())
-      .then(data => {
-        if (data.message === 'FAILED') {
-          alert('재고가 없습니다.');
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.message === "FAILED") {
+          alert("재고가 없습니다.");
         }
         window.location.reload();
       });
@@ -88,7 +104,7 @@ const CartItem = ({ data, priceToString, deleteCartItem }) => {
           <div className="cartItemXbox">
             <span className="cartItemName">{data.name}</span>
             <span className="cartItemPrice">
-              {priceToString(data.price * parseInt(numberOfShoe))}원
+              {priceToString(parseInt(data.price) * parseInt(numberOfShoe))}원
             </span>
             <AiOutlineClose onClick={handleDelete} />
           </div>
@@ -104,7 +120,7 @@ const CartItem = ({ data, priceToString, deleteCartItem }) => {
         </button>
         {isSelect && (
           <ul className="selectList">
-            {SIZE.map(el => (
+            {SIZE.map((el) => (
               <li
                 className="listItem"
                 value={el}

@@ -1,58 +1,71 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { SlMagnifier } from 'react-icons/sl';
-import { BiUser, BiHeart } from 'react-icons/bi';
-import { RiShoppingBagLine } from 'react-icons/ri';
-import { GiHamburgerMenu } from 'react-icons/gi';
-import { api } from '../../config';
-import MIDNAVBAR_LINKER from './NavSD';
-import './Nav.scss';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { SlMagnifier } from "react-icons/sl";
+import { BiUser, BiHeart } from "react-icons/bi";
+import { RiShoppingBagLine } from "react-icons/ri";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { api } from "../../config";
+import MIDNAVBAR_LINKER from "./NavSD";
+import "./Nav.scss";
+
+interface Shoes {
+  name: string;
+  url: string;
+}
+
+interface NavData {
+  id?: number;
+  gender?: string;
+  shoes?: Shoes;
+  shoesCategory?: Shoes[];
+  classname?: string;
+}
 
 const Nav = () => {
-  const [search, setSearch] = useState('');
-  const [mockDataFetch, setMockDataFetch] = useState([]);
-  const [wishlistFetch, setWishlistFetch] = useState([]);
-  const [cartlistFetch, setCartlistFetch] = useState([]);
-  const [menShown, setMenShown] = useState(false);
-  const [womenShown, setWomenShown] = useState(false);
+  const [search, setSearch] = useState("");
+  const [mockDataFetch, setMockDataFetch] = useState<NavData[]>([]);
+  const [wishlistFetch, setWishlistFetch] = useState<number>(0);
+  const [cartlistFetch, setCartlistFetch] = useState<number>(0);
+  const [menShown, setMenShown] = useState<boolean>(false);
+  const [womenShown, setWomenShown] = useState<boolean>(false);
 
-  const onSearch = event => {
+  const onSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
     setSearch(event.target.value);
   };
+  const headers: HeadersInit = new Headers();
 
   useEffect(() => {
-    fetch('/data/Navmockdata/navmockdata.json', {
-      method: 'GET',
+    headers.set("Content-Type", "application/json");
+    headers.set("authorization", localStorage.getItem("token") || "");
+  }, []);
+
+  useEffect(() => {
+    fetch("/data/Navmockdata/navmockdata.json", {
+      method: "GET",
     })
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         setMockDataFetch(data);
       });
   }, []);
 
   useEffect(() => {
     fetch(`${api.wishlists}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-        authorization: localStorage.getItem('token'),
-      },
+      method: "GET",
+      headers,
     })
-      .then(res => res.json())
-      .then(data => setWishlistFetch(data.wishlists.length));
+      .then((res) => res.json())
+      .then((data) => setWishlistFetch(data.wishlists.length));
   }, []);
 
   useEffect(() => {
-    fetch('http://10.58.52.78:3000/carts', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-        authorization: localStorage.getItem('token'),
-      },
+    fetch("http://10.58.52.78:3000/carts", {
+      method: "GET",
+      headers,
     })
-      .then(res => res.json())
-      .then(data => setCartlistFetch(data.wishlists.length));
+      .then((res) => res.json())
+      .then((data) => setCartlistFetch(data.wishlists.length));
   }, []);
 
   return (
@@ -68,7 +81,7 @@ const Nav = () => {
           </div>
           <div className="middleNavBox">
             <div className="assistSection">
-              {MIDNAVBAR_LINKER.map(el => (
+              {MIDNAVBAR_LINKER.map((el) => (
                 <Link key={el.id} className="link" to={el.url}>
                   {el.content}
                 </Link>
@@ -130,12 +143,12 @@ const Nav = () => {
               </div>
             </div>
           </div>
-          {wishlistFetch === !undefined ? (
+          {wishlistFetch && (
             <p className="numberofItemsinWishlist">{wishlistFetch}</p>
-          ) : null}
-          {cartlistFetch === !undefined ? (
+          )}
+          {cartlistFetch && (
             <p className="numberofItemsinCart">{cartlistFetch}</p>
-          ) : null}
+          )}
         </div>
       </nav>
       <div className="hoverWholeBox">
@@ -146,13 +159,13 @@ const Nav = () => {
           {menShown && (
             <div className="hoverContainer">
               {mockDataFetch
-                .filter(mockDataFetch => mockDataFetch.gender === '남성')
-                .map(data => (
+                .filter((mockDataFetch) => mockDataFetch.gender === "남성")
+                .map((data) => (
                   <div key={data.id} className="mock">
-                    <Link className="mainCategory" to={data.shoes.url}>
-                      {data.shoes.name}
+                    <Link className="mainCategory" to={data.shoes!.url}>
+                      {data.shoes?.name}
                     </Link>
-                    {data.shoesCategory.map(el => (
+                    {data.shoesCategory?.map((el) => (
                       <Link to={el.url}>{el.name}</Link>
                     ))}
                   </div>
@@ -162,12 +175,12 @@ const Nav = () => {
           {menShown && (
             <div className="underLayOut">
               {mockDataFetch
-                .filter(mockDataFetch =>
-                  mockDataFetch.shoes.name.includes('남성')
+                .filter((mockDataFetch) =>
+                  mockDataFetch.shoes!.name.includes("남성")
                 )
                 .map((data, idx) => (
-                  <Link key={data.id} className={data.id} to={data.shoes.url}>
-                    {data.shoes.name}
+                  <Link key={data.id} to={data.shoes!.url}>
+                    <div>{data.shoes?.name}</div>
                   </Link>
                 ))}
             </div>
@@ -182,14 +195,14 @@ const Nav = () => {
           {womenShown && (
             <div className="hoverContainer">
               {mockDataFetch
-                .filter(mockDataFetch => mockDataFetch.gender === '여성')
-                .map(data => (
+                .filter((mockDataFetch) => mockDataFetch.gender === "여성")
+                .map((data) => (
                   <div key={data.id} className="mock">
-                    <Link to={data.shoes.url} className="mainCategory">
-                      {data.shoes.name}
+                    <Link to={data.shoes!.url} className="mainCategory">
+                      {data.shoes!.name}
                     </Link>
-                    {data.shoesCategory.map(el => (
-                      <Link key={el} to={el.url}>
+                    {data.shoesCategory!.map((el, idx) => (
+                      <Link key={idx} to={el.url}>
                         {el.name}
                       </Link>
                     ))}
@@ -200,12 +213,12 @@ const Nav = () => {
           {womenShown && (
             <div className="underLayOut">
               {mockDataFetch
-                .filter(mockDataFetch =>
-                  mockDataFetch.shoes.name.includes('여성')
+                .filter((mockDataFetch) =>
+                  mockDataFetch.shoes!.name.includes("여성")
                 )
-                .map(data => (
-                  <Link key={data.id} className={data.id} to={data.shoes.url}>
-                    {data.shoes.name}
+                .map((data) => (
+                  <Link key={data.id} to={data.shoes!.url}>
+                    <div>{data.shoes?.name}</div>
                   </Link>
                 ))}
             </div>

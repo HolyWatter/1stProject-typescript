@@ -1,7 +1,12 @@
-import React from 'react';
-import './CartHeader.scss';
+import React, { FC } from "react";
+import "./CartHeader.scss";
 
-const CartHeader = ({ length, price, sumTotalPrice }) => {
+interface Props {
+  length: number;
+  sumTotalPrice: string;
+}
+
+const CartHeader: FC<Props> = ({ length, sumTotalPrice }) => {
   return (
     <div className="cartHeader">
       <p className="cartText">장바구니</p>
