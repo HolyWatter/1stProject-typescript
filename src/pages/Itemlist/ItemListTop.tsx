@@ -1,17 +1,24 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { AiOutlineRollback } from 'react-icons/ai';
-import { ImEqualizer } from 'react-icons/im';
-import './ItemListTop.scss';
+import React, { FC } from "react";
+import { useNavigate } from "react-router-dom";
+import { AiOutlineRollback } from "react-icons/ai";
+import { ImEqualizer } from "react-icons/im";
+import "./ItemListTop.scss";
+import { ShoesData } from "./Itemlist";
 
-const ItemListTop = ({ clickFilter, gender, shoesData }) => {
+interface Props {
+  clickFilter: ()=>void,
+  gender: string | undefined,
+  shoesData: ShoesData[],
+}
+
+const ItemListTop: FC<Props> = ({ clickFilter, gender, shoesData }) => {
   const navigate = useNavigate();
   const clickBack = () => {
     navigate(-1);
   };
 
   const clickGoMain = () => {
-    navigate('/');
+    navigate("/");
   };
 
   return (
@@ -24,11 +31,11 @@ const ItemListTop = ({ clickFilter, gender, shoesData }) => {
         <span className="itemListTopText underLine" onClick={clickGoMain}>
           Home
         </span>
-        <span className="itemListTopText">/ {gender.toUpperCase()}</span>
+        <span className="itemListTopText">/ {gender?.toUpperCase()}</span>
       </div>
       <div className="itemListTopFlex">
         <div className="itemListTopCategoryAndItemNum">
-          <h4 className="itemListTopCategory">{gender.toUpperCase()}</h4>
+          <h4 className="itemListTopCategory">{gender?.toUpperCase()}</h4>
           <span className="itemListTopItemNum">[{shoesData.length}]</span>
         </div>
         <button onClick={clickFilter} className="filterAndSortBtn">

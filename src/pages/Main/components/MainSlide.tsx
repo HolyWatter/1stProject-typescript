@@ -1,22 +1,31 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { BsArrowRight, BsArrowLeft } from 'react-icons/bs';
-import ItemProduct from '../../../components/ItemProduct/ItemProduct';
-import './MainSlide.scss';
+import React, { useState, useEffect, useRef, CSSProperties } from "react";
+import { BsArrowRight, BsArrowLeft } from "react-icons/bs";
+import { SiLlvm } from "react-icons/si";
+import ItemProduct from "../../../components/ItemProduct/ItemProduct";
+import "./MainSlide.scss";
+
+interface DataMainSlide {
+  productId: number;
+  thumbnailUrl: string;
+  name: string;
+  price: number;
+  categoryname: string;
+}
 
 const MainSlide = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [sources, setSources] = useState([]);
-  const slideRef = useRef(null);
-  const ONE_PAGE = 4;
-  const totalPage = Math.ceil(sources.length / ONE_PAGE) - 1;
-  const width = (totalPage + 1) * 100 + '%';
+  const [currentSlide, setCurrentSlide] = useState<number>(0);
+  const [sources, setSources] = useState<DataMainSlide[]>([]);
+  const slideRef = useRef<any>();
+  const ONE_PAGE: number = 4;
+  const totalPage: number = Math.ceil(sources.length / ONE_PAGE) - 1;
+  const width: string = (totalPage + 1) * 100 + "%";
 
   useEffect(() => {
-    fetch('data/MainSlide.json', {
-      method: 'GET',
+    fetch("data/MainSlide.json", {
+      method: "GET",
     })
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         setSources(data);
       });
   }, []);
@@ -37,7 +46,7 @@ const MainSlide = () => {
   };
 
   useEffect(() => {
-    slideRef.current.style.transition = 'transform 0.7s ease-in-out';
+    slideRef.current.style.transition = "transform 0.7s ease-in-out";
     slideRef.current.style.transform = `translateX(-${
       currentSlide * (100 / (totalPage + 1))
     }%)`;
@@ -51,7 +60,7 @@ const MainSlide = () => {
     }
   }, [currentSlide, totalPage, sources.length]);
 
-  const moveDot = index => {
+  const moveDot = (index: number) => {
     setCurrentSlide(index);
   };
 
@@ -60,12 +69,10 @@ const MainSlide = () => {
       <h2 className="title">BEST OF WEDIDAS</h2>
       <div className="slideContainer">
         <div className="slideWrap" ref={slideRef} style={{ width: width }}>
-          {sources.map(source => (
-            <ItemProduct
-              className="slideItem"
-              key={source.productId}
-              data={source}
-            />
+          {sources.map((source) => (
+            <div className="slideItem">
+              <ItemProduct key={source.productId} data={source} />
+            </div>
           ))}
         </div>
       </div>
@@ -88,7 +95,7 @@ const MainSlide = () => {
           <div
             key={index}
             onClick={() => moveDot(index)}
-            className={`pagination ${currentSlide === index ? 'active' : ''}`}
+            className={`pagination ${currentSlide === index ? "active" : ""}`}
           />
         ))}
       </div>

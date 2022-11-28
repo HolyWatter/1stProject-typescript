@@ -8,8 +8,6 @@ import Itemlist from "./pages/Itemlist/Itemlist";
 import Itemdetail from "./pages/Itemdetail/Itemdetail";
 import Cart from "./pages/Cart/Cart";
 import Wishlist from "./pages/Wishlist/Wishlist";
-import Delivery from "./pages/Delivery/Delivery";
-
 
 const Router=()=> {
   return (
@@ -23,7 +21,6 @@ const Router=()=> {
         <Route path="/detail/:id" element={<Itemdetail />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/wishlist" element={<Wishlist />} />
-        <Route path="/delivery" element={<Delivery />} />
       </Routes>
       <Footer />
     </BrowserRouter>

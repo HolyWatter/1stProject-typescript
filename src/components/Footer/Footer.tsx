@@ -38,7 +38,7 @@ const Footer = () => {
           {FOOTER_BOTTOM_LIST.map(list => {
             return (
               <li key={list.id}>
-                <Link>{list.title}</Link>
+                <button>{list.title}</button>
               </li>
             );
           })}

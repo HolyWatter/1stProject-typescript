@@ -1,28 +1,38 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import WishProduct from './components/WishProduct';
-import Button from '../../components/Button/Button';
-import { api } from '../../config';
-import './Wishlist.scss';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import WishProduct from "./components/WishProduct";
+import Button from "../../components/Button/Button";
+import { api } from "../../config";
+import "./Wishlist.scss";
+
+interface WishItem {
+  productId: number;
+  price: string;
+  id: number;
+  thumbnailUrl: string;
+  name: string;
+  categoryname: string;
+}
 
 const Wishlist = () => {
-  const [wishItemList, setWishItemList] = useState([]);
-
+  const [wishItemList, setWishItemList] = useState<WishItem[]>([]);
+  const headers: HeadersInit = new Headers();
+  useEffect(() => {
+    headers.set("token", localStorage.getItem("token") || "");
+  }, []);
   useEffect(() => {
     fetch(`${api.wishlists}`, {
-      method: 'GET',
-      headers: {
-        authorization: localStorage.getItem('token'),
-      },
+      method: "GET",
+      headers,
     })
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         setWishItemList(data.wishlists);
       });
   }, [wishItemList]);
 
-  const onRemove = id => {
-    setWishItemList(wishItemList.filter(item => item.productId !== id));
+  const onRemove = (id: number) => {
+    setWishItemList(wishItemList.filter((item) => item.productId !== id));
   };
 
   return (
@@ -37,13 +47,14 @@ const Wishlist = () => {
       ) : (
         <>
           <div className="wishListItem">
-            {wishItemList?.map(item => (
-              <WishProduct
-                className="wishItem"
-                key={item.productId}
-                data={item}
-                onRemove={onRemove}
-              />
+            {wishItemList?.map((item) => (
+              <div className="wishItem">
+                <WishProduct
+                  key={item.productId}
+                  data={item}
+                  onRemove={onRemove}
+                />
+              </div>
             ))}
           </div>
           <div className="signupBanner">

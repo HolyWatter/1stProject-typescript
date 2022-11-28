@@ -1,15 +1,26 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { HiOutlineHeart, HiHeart } from 'react-icons/hi';
-import './ItemProduct.scss';
+import React, { FC, useState } from "react";
+import { Link } from "react-router-dom";
+import { HiOutlineHeart, HiHeart } from "react-icons/hi";
+import "./ItemProduct.scss";
 
-const ItemProduct = ({ data }) => {
+interface Data {
+  thumbnailUrl: string;
+  price: number;
+  name: string;
+  categoryname: string;
+}
+
+interface Props {
+  data: Data;
+}
+
+const ItemProduct: FC<Props> = ({ data }) => {
   const [isWish, setIsWish] = useState(false);
   const handleWishClick = () => {
     setIsWish(!isWish);
   };
-  const priceToString = price => {
-    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  const priceToString = (price: number) => {
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
 
   return (
